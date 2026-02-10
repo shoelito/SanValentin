@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para ti ❤️</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #ffe6e6; /* Fondo rosita */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+            overflow: hidden; /* Para que no aparezcan barras de desplazamiento si el botón crece mucho */
+        }
+
+        h1 {
+            color: #d63384;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        #btnSi {
+            background-color: #28a745; /* Verde */
+            color: white;
+            font-weight: bold;
+        }
+
+        #btnNo {
+            background-color: #dc3545; /* Rojo */
+            color: white;
+            font-weight: bold;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .invitacion {
+            animation: fadeIn 2s;
+            color: #333;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .invitacion h2 {
+            color: #d63384;
+            font-size: 2rem;
+        }
+
+        .invitacion p {
+            font-size: 1.5rem;
+            line-height: 1.6;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="preguntaContainer">
+        <h1>¿Quieres ser mi San Valentín? 🌹</h1>
+        <div class="buttons">
+            <button id="btnSi">SÍ</button>
+            <button id="btnNo">NO</button>
+        </div>
+    </div>
+
+    <div id="mensajeFinal" class="hidden invitacion">
+        <h2>¡Sabía que dirías que sí! ❤️</h2>
+        <p>Nos vemos el <strong>14 de febrero a las 20:00 horas</strong>.</p>
+        <p>✨ Vestirse elegante ✨</p>
+        <p><strong>Te amo</strong></p>
+    </div>
+
+    <script>
+        const btnSi = document.getElementById('btnSi');
+        const btnNo = document.getElementById('btnNo');
+        const preguntaContainer = document.getElementById('preguntaContainer');
+        const mensajeFinal = document.getElementById('mensajeFinal');
+
+        let tamanoFuente = 1.2; // Tamaño inicial en REM
+        let paddingX = 20; // Padding horizontal inicial
+        let paddingY = 10; // Padding vertical inicial
+
+        // Acción al apretar "NO"
+        btnNo.addEventListener('click', () => {
+            tamanoFuente += 0.5; // Aumenta la fuente
+            paddingX += 10;      // Aumenta el relleno
+            paddingY += 5;
+
+            // Aplicar nuevos estilos al botón SÍ
+            btnSi.style.fontSize = `${tamanoFuente}rem`;
+            btnSi.style.padding = `${paddingY}px ${paddingX}px`;
+
+            // Opcional: Cambiar el texto del botón NO para hacerlo más divertido
+            const frases = ["¿Segura?", "¿En serio?", "Piénsalo bien", "¡No puedes decir que no!", "Mira el otro botón..."];
+            btnNo.innerText = frases[Math.floor(Math.random() * frases.length)];
+        });
+
+        // Acción al apretar "SÍ"
+        btnSi.addEventListener('click', () => {
+            preguntaContainer.classList.add('hidden'); // Ocultar pregunta
+            mensajeFinal.classList.remove('hidden');   // Mostrar invitación
+            
+            // Efecto de confeti simple (fondo cambia de color)
+            document.body.style.backgroundColor = "#ffcdd2";
+        });
+    </script>
+</body>
+</html>
